@@ -27,6 +27,11 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "courses_id"))
     private List<Course> courses = new ArrayList<>();
 
+    public Student(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public List<Course> getCourses() {
         return courses;
     }
@@ -91,11 +96,11 @@ public class Student {
         if (!(o instanceof Student)) return false;
         Student student = (Student) o;
         return Objects.equals(email, student.email) && name.equals(student.name) &&
-                password.equals(student.password) && Objects.equals(courses, student.courses);
+                password.equals(student.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, name, password, courses);
+        return Objects.hash(email, name, password);
     }
 }

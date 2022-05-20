@@ -1,5 +1,6 @@
 package sba.sms.services;
 
+import jakarta.persistence.TypedQuery;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -35,11 +36,13 @@ public class StudentService implements StudentI {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         List<Student> students = null;
+        List<Student> list = null;
         try {
             transaction = session.beginTransaction();
-            students = session.createQuery("from Student", Student.class).list();
+            TypedQuery<Student> query = session.createQuery("from Student", Student.class);
+            list = query.getResultList();
             transaction.commit();
-            return students;
+            return list;
         } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
@@ -47,8 +50,7 @@ public class StudentService implements StudentI {
         } finally {
             session.close();
         }
-
-        return students;
+        return list;
     }
 
     @Override
