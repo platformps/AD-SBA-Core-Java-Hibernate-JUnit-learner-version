@@ -25,6 +25,13 @@ public class Course {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "courses", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     private List<Student> students = new ArrayList<>();
 
+    public Course(int id, String name, String instructor) {
+        this.id = id;
+        this.name = name;
+        this.instructor = instructor;
+
+    }
+
     public void addStudent(Student student) {
         students.add(student);
         student.getCourses().add(this);
@@ -93,12 +100,11 @@ public class Course {
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
         return id == course.id && Objects.equals(name, course.name) &&
-                Objects.equals(instructor, course.instructor) &&
-                Objects.equals(students, course.students);
+                Objects.equals(instructor, course.instructor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, instructor, students);
+        return Objects.hash(id, name, instructor);
     }
 }

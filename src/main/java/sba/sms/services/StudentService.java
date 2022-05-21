@@ -31,6 +31,7 @@ public class StudentService implements StudentI {
         }
     }
 
+
     @Override
     public List<Student> getAllStudents() {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -52,6 +53,7 @@ public class StudentService implements StudentI {
         }
         return list;
     }
+
 
     @Override
     public Student getStudentByEmail(String email) {
@@ -94,6 +96,7 @@ public class StudentService implements StudentI {
         return false;
     }
 
+
     @Override
     public void registerStudentToCourse(String email, int courseId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -114,6 +117,7 @@ public class StudentService implements StudentI {
         }
     }
 
+
     @Override
     public List<Course> getStudentCourses(String email) {
 
@@ -123,4 +127,6 @@ public class StudentService implements StudentI {
         session.close();
         return courses;
     }
+
+
 }

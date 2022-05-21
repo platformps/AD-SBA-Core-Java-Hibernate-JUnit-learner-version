@@ -30,6 +30,7 @@ public class CourseService implements CourseI {
         }
     }
 
+
     @Override
     public List<Course> getAllCourses() {
         Session session = HibernateUtil.getSessionFactory().openSession();
